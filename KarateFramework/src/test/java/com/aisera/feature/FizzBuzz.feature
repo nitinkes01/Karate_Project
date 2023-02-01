@@ -14,9 +14,17 @@ Feature: Fizz Buzz feature
         * assert response == '<output>'
      
    Examples: 
-		    | read('inputData.csv') |
+        | read('inputData.csv') |
  
 
+ @negative
+   Scenario: alphabet input
+        Given path 'xyz'
+        When method Get
+        Then status 400
+        * print response
+        * def expected_error = 'Bad Request'
+        * assert response.error == expected_error
 
 
 
@@ -41,35 +49,3 @@ Feature: Fizz Buzz feature
 
 
 
-
-
-
-   #Scenario: Create a new article
-        #Given path 'articles'
-        #And request articleRequestBody
-        #When method Post
-        #Then status 200
-        #And match response.article.title == articleRequestBody.article.title
-
-    #Scenario: Create and delete article
-        #Given path 'articles'
-        #And request articleRequestBody
-        #When method Post
-        #Then status 200
-        #* def articleId = response.article.slug
-#
-        #Given params { limit: 10, offset: 0}
-        #Given path 'articles'
-        #When method Get
-        #Then status 200
-        #And match response.articles[0].title == articleRequestBody.article.title
-#
-        #Given path 'articles',articleId
-        #When method Delete
-        #Then status 204
-#
-        #Given params { limit: 10, offset: 0}
-        #Given path 'articles'
-        #When method Get
-        #Then status 200
-        #And match response.articles[0].title != articleRequestBody.article.title
